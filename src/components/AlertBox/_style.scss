@@ -1,0 +1,46 @@
+.alert-wrap {
+  position: relative;
+  display: none;
+  width: 500px;
+  padding: 10px 15px;
+  text-align: left;
+  border-radius: 5px;
+}
+
+.title {
+  height: 35px;
+  line-height: 35px;
+  font-size: $font-size-lg;
+  margin: 0px;
+}
+
+.content {
+  font-size: $font-size-sm;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.alert-visible {
+  display: block;
+}
+
+.alert-success {
+  background-color: $success;
+}
+
+.alert-default {
+  background-color: $primary;
+}
+
+.alert-danger {
+  background-color: $danger;
+}
+
+.alert-warning {
+  background-color: $warning;
+}

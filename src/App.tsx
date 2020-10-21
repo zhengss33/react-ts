@@ -1,39 +1,45 @@
 import React from 'react';
 import logo from './logo.svg';
-import MouseTracker from './components/MouseTracker';
-import useMousePosition from './hook/useMousePosition';
-import useUrlLoader from './hook/useUrlLoader'
-import './App.css';
+import Button, { ButtonType, ButtonSize } from './components/Button/button';
+import AlertBox , { alertType } from './components/AlertBox/alertBox';
+import Menu from './components/Menu/menu';
+import MenuItem from './components/Menu/menuItem';
+import SubMenu from './components/Menu/subMenu';
+import Icon from './components/Icon/icon';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
-interface IShowResult {
-  message: string,
-  status: string
-}
+import './App.css';
+import './styles/index.scss';
+
+library.add(fas)
 
 function App() {
-  const positions = useMousePosition();
-  const [data, loading] = useUrlLoader('https://dog.ceo/api/breeds/image/random')
-  const dogResult = data as IShowResult;
-
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-
-        <p>X: {positions.x}, Y: {positions.y}</p>
-        { loading ? <p>🐶读取中...</p> : <img src={dogResult && dogResult.message}></img>}
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Icon icon={fas.faCoffee} theme="dark" size="10x"/>
+      <Menu
+        defaultIndex="0"
+        onSelect={(index: string) => console.log(index)}
+        mode="vertical"
+        defaultOpenSubMenus={['2']}>
+        <MenuItem>0</MenuItem>
+        <MenuItem disabled>1</MenuItem>
+        <SubMenu title="submenu">
+          <MenuItem>submenu 1</MenuItem>
+          <MenuItem>submenu 2</MenuItem>
+          <MenuItem>submenu 3</MenuItem>
+        </SubMenu>
+        <MenuItem>2</MenuItem>
+      </Menu>
+      <Button disabled> Hello</Button>
+      <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>world</Button>
+      <Button disabled btnType={ButtonType.Link} href="http://www.baidu.com">baidu</Button>
+      <AlertBox
+        title="alert title"
+        closeEnable={true}
+        alertType={alertType.WARNING}
+      ></AlertBox>
     </div>
   );
 }
